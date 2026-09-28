@@ -1,3 +1,17 @@
+<?php
+    require_once "../src/fornecedor_crud.php";
+    if($_SERVER['REQUEST_METHOD'] === "POST") {
+        $nome = $_POST['nome'];
+        inserirFornecedor($conexao, $nome);
+
+        // Após inserir, redirecionamento para listar.php
+        header('location:listar.php');
+
+        // E paramos qualquer outro possível script
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
