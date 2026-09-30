@@ -1,4 +1,6 @@
 <?php
+    // fornecedores/listar.php
+    
     require_once "../src/fornecedor_crud.php";
     if($_SERVER['REQUEST_METHOD'] === "POST") {
         $nome = $_POST['nome'];

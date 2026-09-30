@@ -1,4 +1,6 @@
 <?php
+// fornecedores/listar.php
+
 // Exportando o arquivo de funções CRUD para fornecedor
 require_once "../src/fornecedor_crud.php";
 $fornecedores = buscarFornecedores($conexao);
@@ -40,6 +42,16 @@ $fornecedores = buscarFornecedores($conexao);
                         <tr>
                             <td><?= $fornecedor["id"]; ?></td>
                             <td><?= $fornecedor["nome"]; ?></td>
+                            <td>
+                                <!-- Link Dinâmico
+                                 Além de definir a página a ser aberta/navegada (no caso, editar.php),
+                                 também é necessário "informar" à página com qual resgistro ela irá
+                                 trabalhar. Por isso, criamos um parâmetro (?id) e aplicamos à ele
+                                 o valor dinâmica (id) do fornecedor.
+                                 -->
+                                <a href="editar.php?id=<?= $fornecedor['id'] ?>">Editar</a>
+                                <a href="excluir.php" class="excluir">Deletar</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
