@@ -53,3 +53,27 @@ function buscarFornecedorPorId(PDO $conexao, int $id) : array {
     // Retorno dos dados como array associativo
     return $consulta->fetch();
 }
+
+// Usada em fornecedores/editar.php
+function atualizarFornecedor(PDO $conexao, int $id, string $nome) : void {
+    // Comando SQL
+    $sql = "UPDATE fornecedores SET nome = :nome WHERE id = :id";
+
+    // Preparar comando SQL
+    $consulta = $conexao->prepare($sql);
+    
+    // Atribuir valores aos campos
+    $consulta->bindValue(":nome", $nome);
+    $consulta->bindValue(":id", $id);
+
+    // Executar
+    $consulta->execute();
+}
+
+// Usada em fornecedores/excluir.php
+function excluirFornecedor(PDO $conexao, int $id) : void {
+    $sql = "DELETE FROM fornecedores WHERE id = :id";
+    $consulta = $conexao->prepare($sql);
+    $consulta->bindValue(':id', $id);
+    $consulta->execute();
+}
