@@ -1,3 +1,10 @@
+<?php
+    require_once "../src/produto_crud.php";
+    require_once "../src/fornecedor_crud.php";
+
+    $fornecedores = buscarFornecedores($conexao);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -37,8 +44,10 @@
             <div>
                 <label for="fornecedor">Fornecedor:</label>
                 <select name="fornecedor" id="fornecedor" required>
-                    <option value="">Selecione</option>
-                    <!-- As opções serão preenchidas com os registros do banco de dados. -->
+                    <option value=""></option>
+                    <?php foreach ($fornecedores as $fornecedor): ?>
+                        <option value="<?= $fornecedor['id'] ?>"><?= $fornecedor['nome'] ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <button type="submit">Salvar</button>
