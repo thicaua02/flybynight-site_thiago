@@ -5,11 +5,9 @@ require_once "conecta.php";
 
 function buscarProdutos(PDO $conexao) : array {
     $sql = "SELECT 
-        produtos.nome AS produto, 
-        produtos.preco, 
-        fornecedores.nome AS fornecedor
-        FROM produtos
-        INNER JOIN fornecedores ON produtos.fornecedor_id = fornecedores.id;";
+                id, nome, preco, quantidade 
+            FROM produtos JOIN fornecedores
+            ON fornecedores.id = produtos.fornecedor_id";
     $consulta = $conexao->query($sql);
     return $consulta->fetchAll();
 }
