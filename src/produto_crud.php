@@ -17,7 +17,7 @@ function buscarProdutos(PDO $conexao) : array {
     return $consulta->fetchAll();
 }
 
-function inserirProduto(PDO $conexao, string $nome, string $descricao, float $preco, int $quantidade, int $fornecedorID) : void {
+function inserirProduto(PDO $conexao, string $nome, string $descricao, float $preco, int $quantidade, int $fornecedor) : void {
     $sql = "INSERT INTO produtos (nome, descricao, preco, quantidade, fornecedor_id) VALUES (:nome, :descricao, :preco, :quantidade, :fornecedorID)";
     $consulta = $conexao->prepare($sql);
 
@@ -25,6 +25,14 @@ function inserirProduto(PDO $conexao, string $nome, string $descricao, float $pr
     $consulta->bindValue(":descricao", $descricao);
     $consulta->bindValue(":preco", $preco);
     $consulta->bindValue(":quantidade", $quantidade);
-    $consulta->bindValue(":fornecedorID", $fornecedorID);
+    $consulta->bindValue(":fornecedorID", $fornecedor);
     $consulta->execute();
+}
+
+function buscarProdutoPorId(PDO $conexao, int $id) : array {
+    $sql = "SELECT * FROM produtos WHERE id = :id";
+    $consulta = $conexao->prepare($sql);
+    $consulta->bindValue(':id', $id);
+    $consulta->execute();
+    return $consulta->fetch();
 }

@@ -2,7 +2,9 @@
     require_once "../src/produto_crud.php";
     require_once "../src/fornecedor_crud.php";
 
+    $id = $_GET['id'];
     $fornecedores = buscarFornecedores($conexao);
+    $produto = buscarProdutoPorId($conexao, $id);
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +30,7 @@
         <form action="" method="post">
             <div>
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" maxlength="100" required>
+                <input type="text" name="nome" id="nome" maxlength="100" value="<?= $produto['nome']; ?>" required>
             </div>
             <div>
                 <label for="descricao">Descrição:</label>
@@ -36,11 +38,11 @@
             </div>
             <div>
                 <label for="preco">Preço:</label>
-                <input type="number" name="preco" id="preco" min="0" step="0.01" required>
+                <input type="number" name="preco" id="preco" min="0" step="0.01" value="<?= $produto['preco']; ?>" required>
             </div>
             <div>
                 <label for="quantidade">Quantidade:</label>
-                <input type="number" name="quantidade" id="quantidade" min="0" step="1" required>
+                <input type="number" name="quantidade" id="quantidade" min="0" step="1" value="<?= $produto['quantidade']; ?>" required>
             </div>
             <div>
                 <label for="fornecedor">Fornecedor:</label>
