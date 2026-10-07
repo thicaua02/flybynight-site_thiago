@@ -17,7 +17,7 @@
     }
 ?>
 
-<!DOCTYPE html>x
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>

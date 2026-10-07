@@ -1,10 +1,23 @@
 <?php
+    // Importação
     require_once "../src/produto_crud.php";
     require_once "../src/fornecedor_crud.php";
 
     $id = $_GET['id'];
     $fornecedores = buscarFornecedores($conexao);
     $produto = buscarProdutoPorId($conexao, $id);
+
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        $nome = $_POST['nome'];
+        $descricao = $_POST['descricao'];
+        $preco = $_POST['preco'];
+        $quantidade = $_POST['quantidade'];
+        $fornecedorId = $_POST['fornecedor'];
+        
+        atualizarProduto($conexao, $id, $nome, $descricao, $preco, $quantidade, $fornecedorId);
+        header("location:listar.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +47,7 @@
             </div>
             <div>
                 <label for="descricao">Descrição:</label>
-                <textarea name="descricao" id="descricao" rows="5"></textarea>
+                <textarea name="descricao" id="descricao" rows="5"><?= $produto['descricao']; ?></textarea>
             </div>
             <div>
                 <label for="preco">Preço:</label>
@@ -47,9 +60,11 @@
             <div>
                 <label for="fornecedor">Fornecedor:</label>
                 <select name="fornecedor" id="fornecedor" required>
-                    <option value=""></option>
                     <?php foreach ($fornecedores as $fornecedor): ?>
-                        <option value="<?= $fornecedor['id'] ?>"><?= $fornecedor['nome'] ?></option>
+                        <!-- Desafio -->
+                        <!-- O fornecedor daquele produto que está sendo exibido, JÁ DEVE VIR SELECIONADO. programe os recursos para isso acontecer. -->
+                        <?php $selecao = $produto['fornecedor_id'] === $fornecedor['id'] ? "selected" : "" ?>
+                        <option value="<?= $fornecedor['id'] ?>" <?= $selecao ?>><?= $fornecedor['nome'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
