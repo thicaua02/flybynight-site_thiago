@@ -3,9 +3,21 @@
     require_once "../src/fornecedor_crud.php";
 
     $fornecedores = buscarFornecedores($conexao);
+
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        $nome = $_POST['nome'];
+        $descricao = $_POST['descricao'];
+        $preco = $_POST['preco'];
+        $quantidade = $_POST['quantidade'];
+        $fornecedor = $_POST['fornecedor'];
+
+        inserirProduto($conexao, $nome, $descricao, $preco, $quantidade, $fornecedor);
+        header("location:listar.php");
+        exit;
+    }
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html>x
 <html lang="pt-br">
 
 <head>
