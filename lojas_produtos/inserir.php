@@ -1,3 +1,20 @@
+<?php
+require_once "../src/loja_produto_crud.php";
+require_once "../src/produto_crud.php";
+require_once "../src/loja_crud.php";
+$lojas = buscarLojas($conexao);
+$produtos = buscarProdutos($conexao);
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $loja_id = $_POST['loja'];
+    $produto_id = $_POST['produto'];
+    $estoque = $_POST['estoque'];
+
+    inserirLojaProduto($conexao, $loja_id, $produto_id, $estoque);
+    header("location:listar.php");
+    exit;
+}?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -23,6 +40,11 @@
                 <label for="loja">Loja:</label>
                 <select name="loja" id="loja" required>
                     <option value="">Selecione</option>
+                    <?php foreach ($lojas as $loja): ?>
+                        <option value="<?= $loja['id'] ?>">
+                            <?= $loja['nome']; ?>
+                        </option>
+                    <?php endforeach; ?>
                     <!-- As opções serão preenchidas com os registros do banco de dados. -->
                 </select>
             </div>
@@ -31,6 +53,9 @@
                 <label for="produto">Produto:</label>
                 <select name="produto" id="produto" required>
                     <option value="">Selecione</option>
+                    <?php foreach ($produtos as $produto): ?>
+                       
+                    <?php endforeach; ?>
                     <!-- As opções serão preenchidas com os registros do banco de dados. -->
                 </select>
             </div>
