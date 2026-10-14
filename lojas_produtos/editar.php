@@ -1,3 +1,25 @@
+<?php
+    require_once "../src/loja_crud.php";
+    require_once "../src/produto_crud.php";
+    require_once "../src/loja_produto_crud.php";
+
+    $id_loja = $_GET['loja_id'];
+    $id_produto = $_GET['produto_id'];
+    $loja_produto = buscarLojaProdutoPorIds($conexao, $id_loja, $id_produto);
+    $produtos = buscarProdutos($conexao);
+    $lojas = buscarLojas($conexao);
+
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        $loja_id = $_POST['loja'];
+        $produto_id = $_POST['produto'];
+        $estoque = $_POST['estoque'];
+
+        atualizarLojaProduto($conexao, $loja_id, $produto_id, $estoque);
+        header("location:listar.php");
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -23,21 +45,28 @@
             <div>
                 <label for="loja">Loja:</label>
                 <select name="loja" id="loja" required>
-                    <option value="">Selecione</option>
-                    <!-- As opções serão preenchidas com os registros do banco de dados. -->
+                    <?php foreach ($lojas as $loja): ?>
+                        <option value="<?= $loja['id'] ?>" <?= $loja_produto['loja_id'] === $loja["id"] ? "selected" : "" ?>>
+                            <?= $loja['nome'] ?>
+                        </option>
+                    <?php endforeach ?>
                 </select>
             </div>
 
             <div>
                 <label for="produto">Produto:</label>
                 <select name="produto" id="produto" required>
-                    <option value="">Selecione</option>
                     <!-- As opções serão preenchidas com os registros do banco de dados. -->
+                    <?php foreach ($produtos as $produto): ?>
+                        <option value="<?= $loja['id'] ?>" <?= $loja_produto['produto_id'] === $produto["id"] ? "selected" : "" ?>>
+                            <?= $produto['nome_produto'] ?>
+                        </option>
+                    <?php endforeach ?>
                 </select>
             </div>
             <div>
                 <label for="estoque">Estoque:</label>
-                <input type="number" name="estoque" id="estoque" min="0" step="1" required>
+                <input type="number" name="estoque" id="estoque" min="0" step="1" required value="<?= $loja_produto['estoque'] ?>">
             </div>
             <button type="submit">Atualizar</button>
         </form>

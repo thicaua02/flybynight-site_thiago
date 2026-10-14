@@ -45,8 +45,8 @@
                             <td><?= buscarProdutoPorId($conexao, $lojaProduto['produto_id'])['nome']; ?></td>
                             <td><?= $lojaProduto['estoque'] ?></td>
                             <td>
-                                <a href="editar.php?loja_id=<?= $lojaProduto['loja_id'] ?>&produto_id=<?= $lojaProduto['produto_id'] ?>">Editar</a>
-                                <a href="excluir.php?loja_id=<?= $lojaProduto['loja_id'] ?>&produto_id=<?= $lojaProduto['produto_id'] ?>" class="excluir">Excluir</a>
+                            <a href="editar.php?loja_id=<?= $lojaProduto['loja_id'] ?>&produto_id=<?= $lojaProduto['produto_id'] ?>">Editar</a>
+                                <a href="excluir.php?loja_id=<?= $lojaProduto['loja_id'] ?>&produto_id=<?= $lojaProduto['produto_id'] ?>&" class="excluir">Excluir</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
