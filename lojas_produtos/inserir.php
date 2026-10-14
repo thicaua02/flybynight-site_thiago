@@ -54,7 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <select name="produto" id="produto" required>
                     <option value="">Selecione</option>
                     <?php foreach ($produtos as $produto): ?>
-                       
+                       <option value="<?= $produto['id'] ?>">
+                            <?= $produto['nome_produto'] ?>
+                        </option>
                     <?php endforeach; ?>
                     <!-- As opções serão preenchidas com os registros do banco de dados. -->
                 </select>
