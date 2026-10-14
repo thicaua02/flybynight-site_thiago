@@ -10,11 +10,11 @@
     $lojas = buscarLojas($conexao);
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
-        $loja_id = $_POST['loja'];
-        $produto_id = $_POST['produto'];
+        $loja = $_POST['loja'];
+        $produto = $_POST['produto'];
         $estoque = $_POST['estoque'];
 
-        atualizarLojaProduto($conexao, $loja_id, $produto_id, $estoque);
+        atualizarLojaProduto($conexao, $loja, $produto, $id_loja, $id_produto, $estoque);
         header("location:listar.php");
         exit;
     }
